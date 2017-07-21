@@ -14,11 +14,68 @@
     <!-- Bootstrap -->
 
     <link rel="stylesheet" href="inc/gh-fork-ribbon.min.css" />
+
+    <style>
+      body {
+        padding-top: 30px;
+      }
+      #options label.item.none img {
+        border: 1px dotted #888;
+      }
+      #options label.item {
+        display: inline;
+        margin-right: 5px;
+        cursor: hand;
+        opacity: 0.8;
+      }
+      #options label.item:hover {
+        opacity: 1;
+      }
+      #options label.item .tooltip {
+        text-transform: capitalize;
+      }
+      #options label.item input {
+        display: none;
+      }
+      #options label.item img {
+        width: 20%;
+      }
+      #preview {
+        height: 700px;
+      }
+      #preview img {
+        top: 0px;
+        width: 100%;
+        position: absolute;
+      }
+      footer {
+        margin: 20px 0px;
+        font-size: 12px;
+        text-align: right;
+      }
+      .big-gopher {
+        width: 100%;
+      }
+      .options-panel {
+        margin-top: 200px;
+      }
+      .options-panel-mob {
+        margin-top: 20px;
+      }
+      .panel-body {
+        max-height: 390px;
+        overflow-y: scroll;
+      }
+    </style>
   </head>
   <body>
     <a class="github-fork-ribbon right-top" target="_blank" href="https://github.com/myitcv/gopherize.me" title="Source on GitHub">Source on GitHub</a>
     <div class="container">
-      <div id="gopherize.me"></div>
+      <div classname='container'>
+        <div classname='row'>
+          <div id="gopherize.me"></div>
+        </div>
+      </div>
     </div>
   </body>
   <script src="client.js"></script>

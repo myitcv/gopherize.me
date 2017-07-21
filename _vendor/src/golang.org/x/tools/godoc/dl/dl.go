@@ -151,7 +151,7 @@ type Feature struct {
 	File
 	fileRE *regexp.Regexp
 
-	Platform     string // "Microsoft Windows", "Mac OS X", "Linux"
+	Platform     string // "Microsoft Windows", "Apple macOS", "Linux"
 	Requirements string // "Windows XP and above, 64-bit Intel Processor"
 }
 
@@ -160,12 +160,12 @@ type Feature struct {
 var featuredFiles = []Feature{
 	{
 		Platform:     "Microsoft Windows",
-		Requirements: "Windows XP or later, Intel 64-bit processor",
+		Requirements: "Windows XP SP2 or later, Intel 64-bit processor",
 		fileRE:       regexp.MustCompile(`\.windows-amd64\.msi$`),
 	},
 	{
-		Platform:     "Apple OS X",
-		Requirements: "OS X 10.8 or later, Intel 64-bit processor",
+		Platform:     "Apple macOS",
+		Requirements: "macOS 10.8 or later, Intel 64-bit processor",
 		fileRE:       regexp.MustCompile(`\.darwin-amd64(-osx10\.8)?\.pkg$`),
 	},
 	{
@@ -486,15 +486,15 @@ func pretty(s string) string {
 }
 
 var prettyStrings = map[string]string{
-	"darwin":  "OS X",
+	"darwin":  "macOS",
 	"freebsd": "FreeBSD",
 	"linux":   "Linux",
 	"windows": "Windows",
 
-	"386":   "32-bit",
-	"amd64": "64-bit",
-
+	"386":    "x86",
+	"amd64":  "x86-64",
 	"armv6l": "ARMv6",
+	"arm64":  "ARMv8",
 
 	"archive":   "Archive",
 	"installer": "Installer",

@@ -14,7 +14,5 @@ var document = dom.GetWindow().Document()
 func main() {
 	domTarget := document.GetElementByID("gopherize.me")
 
-	d := r.Div(nil, r.S("Hello world"))
-
-	r.Render(d, domTarget)
+	r.Render(Outer(), domTarget)
 }

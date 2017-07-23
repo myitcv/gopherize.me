@@ -1,8 +1,27 @@
 package main
 
+type Gopher struct {
+	Parts []string
+}
+
+type UpdateGopher interface {
+	ResetGopher()
+	UpdateGopher(part int, val string)
+	RandomGopher()
+}
+
+type Config struct {
+	Categories []*Category
+}
+
+type Category struct {
+	Name    string
+	Options []string
+}
+
 var hackConfig = &Config{
-	Categories: []Category{
-		Category{
+	Categories: []*Category{
+		&Category{
 			Name: "Body",
 			Options: []string{
 				"010-Body/blue_gopher",
@@ -13,7 +32,7 @@ var hackConfig = &Config{
 				"010-Body/purple_gopher",
 			},
 		},
-		Category{
+		&Category{
 			Name: "Eyes",
 			Options: []string{
 				"020-Eyes/crazy_eyes",
@@ -27,9 +46,10 @@ var hackConfig = &Config{
 				"020-Eyes/looking_up_no_lashes",
 			},
 		},
-		Category{
+		&Category{
 			Name: "Shirts",
 			Options: []string{
+				"",
 				"021-Shirts/1_up_shirt",
 				"021-Shirts/Octocat",
 				"021-Shirts/Octocat_1",
@@ -85,9 +105,10 @@ var hackConfig = &Config{
 				"021-Shirts/zelda",
 			},
 		},
-		Category{
+		&Category{
 			Name: "Hair",
 			Options: []string{
+				"",
 				"022-Hair/ash_blonde_hair",
 				"022-Hair/black_hair",
 				"022-Hair/blonde_bangs",
@@ -143,9 +164,10 @@ var hackConfig = &Config{
 				"022-Hair/trump_hair",
 			},
 		},
-		Category{
-			Name: "FacialHair",
+		&Category{
+			Name: "Facial Hair",
 			Options: []string{
+				"",
 				"023-Facial_Hair/black_beard",
 				"023-Facial_Hair/black_moustache",
 				"023-Facial_Hair/black_stache",
@@ -184,9 +206,10 @@ var hackConfig = &Config{
 				"023-Facial_Hair/this_weird_thing",
 			},
 		},
-		Category{
+		&Category{
 			Name: "Glasses",
 			Options: []string{
+				"",
 				"024-Glasses/all_black_sunglasses",
 				"024-Glasses/black_rimmed_glasses",
 				"024-Glasses/blue_lenses",
@@ -210,9 +233,10 @@ var hackConfig = &Config{
 				"024-Glasses/sunglasses",
 			},
 		},
-		Category{
-			Name: "HatsHairAccessories",
+		&Category{
+			Name: "Hats and Hair Accessories",
 			Options: []string{
+				"",
 				"025-Hats_and_Hair_Accessories/Large_black_yellow_bow",
 				"025-Hats_and_Hair_Accessories/bandana",
 				"025-Hats_and_Hair_Accessories/bat_gopher",
@@ -243,9 +267,10 @@ var hackConfig = &Config{
 				"025-Hats_and_Hair_Accessories/yellow_bow",
 			},
 		},
-		Category{
+		&Category{
 			Name: "Extras",
 			Options: []string{
+				"",
 				"027-Extras/Large_black_yellow_bow",
 				"027-Extras/bowtie",
 				"027-Extras/camera",

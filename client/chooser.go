@@ -3,9 +3,6 @@ package main
 //go:generate reactGen
 
 import (
-	"math/rand"
-	"path/filepath"
-
 	r "myitcv.io/react"
 	"myitcv.io/react/jsx"
 )
@@ -33,8 +30,21 @@ func Chooser(p ChooserProps) *ChooserDef {
 func (ch *ChooserDef) Render() r.Element {
 	var catDivs []r.Element
 
+	st := ch.State()
+	props := ch.Props()
+	cg := props.Current
+
 	for i, cat := range ch.Props().Config.Categories {
-		catDivs = append(catDivs, ch.buildPanel(cat, i))
+		catDivs = append(catDivs, Panel(
+			PanelProps{
+				Category: cat,
+				Open:     st.open == i,
+				Part:     i,
+				Selected: cg.Parts[i],
+				Update:   props.Update,
+				Expand:   ch,
+			},
+		))
 	}
 
 	args := []r.Element{
@@ -65,116 +75,61 @@ func (ch *ChooserDef) Render() r.Element {
 			},
 			catDivs...,
 		),
+		r.Div(&r.DivProps{ClassName: "panel panel-default"},
+			r.Div(
+				&r.DivProps{
+					ClassName: "panel-body text-right",
+					Style:     &r.CSS{OverflowY: "hidden"},
+				},
+				r.Button(
+					&r.ButtonProps{
+						ID:        "next-button",
+						ClassName: "btn btn-primary btn-lg",
+					},
+					r.S("Save \u0026 continue\u2026"),
+					r.I(&r.IProps{ClassName: "glyphicon glyphicon glyphicon-chevron-right"}),
+				),
+			),
+		),
 		jsx.HTMLElem(`
-			<div>
-				<div classname="panel panel-default">
-					<div classname="panel-body text-right" style="overflow-y: hidden">
-						<button id='next-button' classname='btn btn-primary btn-lg'>
-							Save &amp; continue&hellip;
-							<i classname='glyphicon glyphicon glyphicon-chevron-right'></i>
-						</button>
-					</div>
-				</div>
-				<footer>
-					Be truly unique, there are
-					<span classname='total_combinations'></span>
-					<hr/>
-					Artwork by <a href='https://twitter.com/ashleymcnamara' target='_blank'>Ashley McNamara</a><br />inspired by <a href='http://reneefrench.blogspot.co.uk/' target='_blank'>Renee French</a><br />
-					Web app by <a href='https://twitter.com/matryer' target='_blank'>Mat Ryer</a>
-					<hr>
-					<a href='https://github.com/matryer/gopherize.me'>View on GitHub</a>
-					●
-					<a href='/branding'>Add your brand</a>
-				</footer>
-			</div>
+			<footer>
+				Be truly unique, there are
+				<span classname='total_combinations'></span>
+				<hr/>
+				Artwork by <a href='https://twitter.com/ashleymcnamara' target='_blank'>Ashley McNamara</a><br />inspired by <a href='http://reneefrench.blogspot.co.uk/' target='_blank'>Renee French</a><br />
+				Original web app by <a href='https://twitter.com/matryer' target='_blank'>Mat Ryer</a><br/>
+				Front-end Go React version by <a href="https://twitter.com/_myitcv" target="_blank">Paul Jolly</a>
+				<hr>
+				<a href='https://github.com/matryer/gopherize.me'>View on GitHub</a>
+				●
+				<a href='/branding'>Add your brand</a>
+			</footer>
 		`),
 	}
 
 	return r.Div(&r.DivProps{ClassName: "col-xs-4"}, args...)
 }
 
-func (ch *ChooserDef) buildPanel(c Category, i int) *r.DivDef {
-	collapse := " collapse"
-
-	if i == ch.State().open {
-		collapse = ""
-	}
-
-	var imgs []r.Element
-
-	for _, o := range c.Options {
-		imgs = append(imgs,
-			r.Label(
-				&r.LabelProps{ClassName: "item"},
-				r.Img(
-					&r.ImgProps{Src: filepath.Join("..", "artwork", o+"_thumbnail.png")},
-				),
-			),
-		)
-	}
-
-	return r.Div(&r.DivProps{ClassName: "panel panel-default"},
-		r.Div(&r.DivProps{ClassName: "panel-heading", Role: "tab"},
-			r.H4(
-				&r.H4Props{ClassName: "panel-title"},
-				r.A(
-					&r.AProps{
-						OnClick: expandClick{ch: ch, i: i},
-					},
-					r.S(c.Name),
-				),
-			),
-		),
-		r.Div(
-			&r.DivProps{
-				ID:        "Body",
-				ClassName: "panel-collapse collapse in",
-				Role:      "tabpanel",
-			},
-			r.Div(
-				&r.DivProps{ClassName: "panel-body" + collapse},
-				r.Div(nil, imgs...),
-			),
-		),
-	)
+func (ch *ChooserDef) Expand(i int) {
+	s := ch.State()
+	s.open = i
+	ch.SetState(s)
 }
 
-type expandClick struct {
-	ch *ChooserDef
-	i  int
-}
-
-func (ex expandClick) OnClick(e *r.SyntheticMouseEvent) {
-	s := ex.ch.State()
-	s.open = ex.i
-	ex.ch.SetState(s)
-
-	e.PreventDefault()
+type ExpandPanel interface {
+	Expand(i int)
 }
 
 type shuffleClick struct{ *ChooserDef }
 
 func (sh shuffleClick) OnClick(e *r.SyntheticMouseEvent) {
-	c := sh.ChooserDef.Props().Config
-
-	var parts []string
-
-	for _, cat := range c.Categories {
-		p := cat.Options[rand.Intn(len(cat.Options))]
-		parts = append(parts, p)
-	}
-
-	g := &Gopher{Parts: parts}
-
-	sh.Props().Update.UpdateGopher(g)
-}
-
-func randElem(ss []string) string {
-	return ss[rand.Intn(len(ss))]
+	sh.Props().Update.RandomGopher()
+	e.PreventDefault()
 }
 
 type resetClick struct{ *ChooserDef }
 
 func (sh resetClick) OnClick(e *r.SyntheticMouseEvent) {
-	sh.Props().Update.UpdateGopher(nil)
+	sh.Props().Update.ResetGopher()
+	e.PreventDefault()
 }

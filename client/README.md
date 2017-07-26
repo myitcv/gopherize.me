@@ -1,11 +1,4 @@
-A simple web app that showcases the immutable-type-based TodoApp example component.
+### gopherize.me
 
-To run this web app locally:
-
-```bash
-gopherjs serve
-```
-
-Now navigate to [http://localhost:8080/myitcv.io/react/examples/sites/immtodoapp/](http://localhost:8080/myitcv.io/react/examples/sites/immtodoapp/).
-
-See [the wiki](https://github.com/myitcv/react/wiki) for more details
+A simple frontend-only rewrite of https://gopherize.me using Go (via [GopherJS](https://github.com/gopherjs/gopherjs))
+and React (via [`myitcv.io/react`](https://myitcv.io/react))

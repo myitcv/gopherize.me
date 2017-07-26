@@ -4,7 +4,11 @@ package main
 
 import "myitcv.io/react"
 
-func (p *PanelDef) ShouldComponentUpdateIntf(nextProps, prevState, nextState interface{}) bool {
+type PanelElem struct {
+	react.Element
+}
+
+func (p PanelDef) ShouldComponentUpdateIntf(nextProps, prevState, nextState interface{}) bool {
 	res := false
 
 	{
@@ -13,8 +17,12 @@ func (p *PanelDef) ShouldComponentUpdateIntf(nextProps, prevState, nextState int
 	return res
 }
 
+func buildPanel(cd react.ComponentDef) react.Component {
+	return PanelDef{ComponentDef: cd}
+}
+
 // Props is an auto-generated proxy to the current props of Panel
-func (p *PanelDef) Props() PanelProps {
+func (p PanelDef) Props() PanelProps {
 	uprops := p.ComponentDef.Props()
 	return uprops.(PanelProps)
 }

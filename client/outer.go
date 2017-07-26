@@ -17,20 +17,18 @@ type OuterState struct {
 	config  *Config
 }
 
-func Outer() *OuterDef {
-	res := new(OuterDef)
-	r.BlessElement(res, nil)
-	return res
+func Outer() *OuterElem {
+	return &OuterElem{Element: r.CreateElement(buildOuter, nil)}
 }
 
-func (o *OuterDef) ComponentWillMount() {
+func (o OuterDef) ComponentWillMount() {
 	o.SetState(OuterState{
 		current: defaultGopher(hackConfig),
 		config:  hackConfig,
 	})
 }
 
-func (o *OuterDef) Render() r.Element {
+func (o OuterDef) Render() r.Element {
 	return r.Div(nil,
 		Preview(PreviewProps{Current: o.State().current}),
 		Chooser(ChooserProps{
@@ -41,13 +39,13 @@ func (o *OuterDef) Render() r.Element {
 	)
 }
 
-func (o *OuterDef) ResetGopher() {
+func (o OuterDef) ResetGopher() {
 	s := o.State()
 	s.current = defaultGopher(s.config)
 	o.SetState(s)
 }
 
-func (o *OuterDef) UpdateGopher(part int, val string) {
+func (o OuterDef) UpdateGopher(part int, val string) {
 	s := o.State()
 
 	nps := make([]string, len(s.current.Parts))
@@ -58,7 +56,7 @@ func (o *OuterDef) UpdateGopher(part int, val string) {
 	o.SetState(s)
 }
 
-func (o *OuterDef) RandomGopher() {
+func (o OuterDef) RandomGopher() {
 	s := o.State()
 	c := o.State().config
 

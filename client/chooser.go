@@ -3,6 +3,7 @@ package main
 //go:generate reactGen
 
 import (
+	"github.com/gopherjs/gopherjs/js"
 	r "myitcv.io/react"
 	"myitcv.io/react/jsx"
 )
@@ -21,13 +22,11 @@ type ChooserDef struct {
 	r.ComponentDef
 }
 
-func Chooser(p ChooserProps) *ChooserDef {
-	res := new(ChooserDef)
-	r.BlessElement(res, p)
-	return res
+func Chooser(p ChooserProps) ChooserElem {
+	return ChooserElem{Element: r.CreateElement(buildChooser, p)}
 }
 
-func (ch *ChooserDef) Render() r.Element {
+func (ch ChooserDef) Render() r.Element {
 	var catDivs []r.Element
 
 	st := ch.State()
@@ -85,6 +84,7 @@ func (ch *ChooserDef) Render() r.Element {
 					&r.ButtonProps{
 						ID:        "next-button",
 						ClassName: "btn btn-primary btn-lg",
+						OnClick:   saveClick{ch},
 					},
 					r.S("Save \u0026 continue\u2026"),
 					r.I(&r.IProps{ClassName: "glyphicon glyphicon glyphicon-chevron-right"}),
@@ -110,7 +110,7 @@ func (ch *ChooserDef) Render() r.Element {
 	return r.Div(&r.DivProps{ClassName: "col-xs-4"}, args...)
 }
 
-func (ch *ChooserDef) Expand(i int) {
+func (ch ChooserDef) Expand(i int) {
 	s := ch.State()
 	s.open = i
 	ch.SetState(s)
@@ -120,16 +120,23 @@ type ExpandPanel interface {
 	Expand(i int)
 }
 
-type shuffleClick struct{ *ChooserDef }
+type shuffleClick struct{ ChooserDef }
 
 func (sh shuffleClick) OnClick(e *r.SyntheticMouseEvent) {
 	sh.Props().Update.RandomGopher()
 	e.PreventDefault()
 }
 
-type resetClick struct{ *ChooserDef }
+type resetClick struct{ ChooserDef }
 
-func (sh resetClick) OnClick(e *r.SyntheticMouseEvent) {
-	sh.Props().Update.ResetGopher()
+func (rc resetClick) OnClick(e *r.SyntheticMouseEvent) {
+	rc.Props().Update.ResetGopher()
+	e.PreventDefault()
+}
+
+type saveClick struct{ ChooserDef }
+
+func (sc saveClick) OnClick(e *r.SyntheticMouseEvent) {
+	js.Global.Call("alert", "Frontend only for now...")
 	e.PreventDefault()
 }

@@ -16,20 +16,18 @@ type PreviewDef struct {
 	r.ComponentDef
 }
 
-func Preview(p PreviewProps) *PreviewDef {
-	res := new(PreviewDef)
-	r.BlessElement(res, p)
-	return res
+func Preview(p PreviewProps) PreviewElem {
+	return PreviewElem{Element: r.CreateElement(buildPreview, p)}
 }
 
-func (o *PreviewDef) Render() r.Element {
+func (o PreviewDef) Render() r.Element {
 	var parts []r.Element
 
 	curr := o.Props().Current
 
 	addPart := func(p string) {
 		parts = append(parts, r.Img(&r.ImgProps{
-			Src: filepath.Join("..", "artwork", p+".png"),
+			Src: filepath.Join("artwork", p+".png"),
 			Style: &r.CSS{
 				MarginTop: "0px",
 			},

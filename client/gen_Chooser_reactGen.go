@@ -4,7 +4,11 @@ package main
 
 import "myitcv.io/react"
 
-func (c *ChooserDef) ShouldComponentUpdateIntf(nextProps, prevState, nextState interface{}) bool {
+type ChooserElem struct {
+	react.Element
+}
+
+func (c ChooserDef) ShouldComponentUpdateIntf(nextProps, prevState, nextState interface{}) bool {
 	res := false
 
 	{
@@ -15,16 +19,20 @@ func (c *ChooserDef) ShouldComponentUpdateIntf(nextProps, prevState, nextState i
 	return res
 }
 
+func buildChooser(cd react.ComponentDef) react.Component {
+	return ChooserDef{ComponentDef: cd}
+}
+
 // SetState is an auto-generated proxy proxy to update the state for the
 // Chooser component.  SetState does not immediately mutate c.State()
 // but creates a pending state transition.
-func (c *ChooserDef) SetState(state ChooserState) {
+func (c ChooserDef) SetState(state ChooserState) {
 	c.ComponentDef.SetState(state)
 }
 
 // State is an auto-generated proxy to return the current state in use for the
 // render of the Chooser component
-func (c *ChooserDef) State() ChooserState {
+func (c ChooserDef) State() ChooserState {
 	return c.ComponentDef.State().(ChooserState)
 }
 
@@ -35,7 +43,7 @@ func (c ChooserState) IsState() {}
 var _ react.State = ChooserState{}
 
 // GetInitialStateIntf is an auto-generated proxy to GetInitialState
-func (c *ChooserDef) GetInitialStateIntf() react.State {
+func (c ChooserDef) GetInitialStateIntf() react.State {
 	return ChooserState{}
 }
 
@@ -44,7 +52,7 @@ func (c ChooserState) EqualsIntf(val interface{}) bool {
 }
 
 // Props is an auto-generated proxy to the current props of Chooser
-func (c *ChooserDef) Props() ChooserProps {
+func (c ChooserDef) Props() ChooserProps {
 	uprops := c.ComponentDef.Props()
 	return uprops.(ChooserProps)
 }

@@ -4,7 +4,11 @@ package main
 
 import "myitcv.io/react"
 
-func (p *PreviewDef) ShouldComponentUpdateIntf(nextProps, prevState, nextState interface{}) bool {
+type PreviewElem struct {
+	react.Element
+}
+
+func (p PreviewDef) ShouldComponentUpdateIntf(nextProps, prevState, nextState interface{}) bool {
 	res := false
 
 	{
@@ -13,8 +17,12 @@ func (p *PreviewDef) ShouldComponentUpdateIntf(nextProps, prevState, nextState i
 	return res
 }
 
+func buildPreview(cd react.ComponentDef) react.Component {
+	return PreviewDef{ComponentDef: cd}
+}
+
 // Props is an auto-generated proxy to the current props of Preview
-func (p *PreviewDef) Props() PreviewProps {
+func (p PreviewDef) Props() PreviewProps {
 	uprops := p.ComponentDef.Props()
 	return uprops.(PreviewProps)
 }

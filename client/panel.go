@@ -6,7 +6,7 @@ import (
 	r "myitcv.io/react"
 )
 
-var blank = filepath.Join("..", "artwork", "whitebox_thumbnail.png")
+var blank = filepath.Join("artwork", "whitebox_thumbnail.png")
 
 type PanelProps struct {
 	Category *Category
@@ -17,17 +17,15 @@ type PanelProps struct {
 	Expand   ExpandPanel
 }
 
-func Panel(p PanelProps) *PanelDef {
-	res := new(PanelDef)
-	r.BlessElement(res, p)
-	return res
+func Panel(p PanelProps) PanelElem {
+	return PanelElem{Element: r.CreateElement(buildPanel, p)}
 }
 
 type PanelDef struct {
 	r.ComponentDef
 }
 
-func (pa *PanelDef) Render() r.Element {
+func (pa PanelDef) Render() r.Element {
 	props := pa.Props()
 
 	collapse := " collapse"
@@ -51,7 +49,7 @@ func (pa *PanelDef) Render() r.Element {
 		if o == "" {
 			src = blank
 		} else {
-			src = filepath.Join("..", "artwork", o+"_thumbnail.png")
+			src = filepath.Join("artwork", o+"_thumbnail.png")
 		}
 
 		imgs = append(imgs,

@@ -4,7 +4,11 @@ package main
 
 import "myitcv.io/react"
 
-func (o *OuterDef) ShouldComponentUpdateIntf(nextProps, prevState, nextState interface{}) bool {
+type OuterElem struct {
+	react.Element
+}
+
+func (o OuterDef) ShouldComponentUpdateIntf(nextProps, prevState, nextState interface{}) bool {
 	res := false
 
 	v := prevState.(OuterState)
@@ -12,16 +16,20 @@ func (o *OuterDef) ShouldComponentUpdateIntf(nextProps, prevState, nextState int
 	return res
 }
 
+func buildOuter(cd react.ComponentDef) react.Component {
+	return OuterDef{ComponentDef: cd}
+}
+
 // SetState is an auto-generated proxy proxy to update the state for the
 // Outer component.  SetState does not immediately mutate o.State()
 // but creates a pending state transition.
-func (o *OuterDef) SetState(state OuterState) {
+func (o OuterDef) SetState(state OuterState) {
 	o.ComponentDef.SetState(state)
 }
 
 // State is an auto-generated proxy to return the current state in use for the
 // render of the Outer component
-func (o *OuterDef) State() OuterState {
+func (o OuterDef) State() OuterState {
 	return o.ComponentDef.State().(OuterState)
 }
 
@@ -32,7 +40,7 @@ func (o OuterState) IsState() {}
 var _ react.State = OuterState{}
 
 // GetInitialStateIntf is an auto-generated proxy to GetInitialState
-func (o *OuterDef) GetInitialStateIntf() react.State {
+func (o OuterDef) GetInitialStateIntf() react.State {
 	return OuterState{}
 }
 

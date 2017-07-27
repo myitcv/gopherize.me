@@ -20,6 +20,12 @@ func buildOuter(cd react.ComponentDef) react.Component {
 	return OuterDef{ComponentDef: cd}
 }
 
+func buildOuterElem(children ...react.Element) *OuterElem {
+	return &OuterElem{
+		Element: react.CreateElement(buildOuter, nil),
+	}
+}
+
 // SetState is an auto-generated proxy proxy to update the state for the
 // Outer component.  SetState does not immediately mutate o.State()
 // but creates a pending state transition.

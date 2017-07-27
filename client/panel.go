@@ -17,8 +17,8 @@ type PanelProps struct {
 	Expand   ExpandPanel
 }
 
-func Panel(p PanelProps) PanelElem {
-	return PanelElem{Element: r.CreateElement(buildPanel, p)}
+func Panel(p PanelProps) *PanelElem {
+	return buildPanelElem(p)
 }
 
 type PanelDef struct {

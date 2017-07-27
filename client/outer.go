@@ -18,7 +18,7 @@ type OuterState struct {
 }
 
 func Outer() *OuterElem {
-	return &OuterElem{Element: r.CreateElement(buildOuter, nil)}
+	return buildOuterElem()
 }
 
 func (o OuterDef) ComponentWillMount() {

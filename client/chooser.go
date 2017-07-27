@@ -22,8 +22,8 @@ type ChooserDef struct {
 	r.ComponentDef
 }
 
-func Chooser(p ChooserProps) ChooserElem {
-	return ChooserElem{Element: r.CreateElement(buildChooser, p)}
+func Chooser(p ChooserProps) *ChooserElem {
+	return buildChooserElem(p)
 }
 
 func (ch ChooserDef) Render() r.Element {

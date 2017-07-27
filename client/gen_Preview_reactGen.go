@@ -21,6 +21,12 @@ func buildPreview(cd react.ComponentDef) react.Component {
 	return PreviewDef{ComponentDef: cd}
 }
 
+func buildPreviewElem(props PreviewProps, children ...react.Element) *PreviewElem {
+	return &PreviewElem{
+		Element: react.CreateElement(buildPreview, props),
+	}
+}
+
 // Props is an auto-generated proxy to the current props of Preview
 func (p PreviewDef) Props() PreviewProps {
 	uprops := p.ComponentDef.Props()

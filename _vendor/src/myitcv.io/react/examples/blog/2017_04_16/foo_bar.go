@@ -37,15 +37,15 @@ type FooBarState struct {
 }
 
 // FooBar is the constructor for a FooBar component. Given that this component
-// can take props (can, not must), we add a parameter of type *FooBarProps
+// can take props (can, not must), we add a parameter of type FooBarProps
 //
 func FooBar(p FooBarProps) *FooBarElem {
 	// every component constructor must call this function
-	return &FooBarElem{Element: r.CreateElement(buildFooBar, p)}
+	return buildFooBarElem(p)
 }
 
 // Render is a required method on all React components. Notice that the method
-// is declared on a pointer type *FooBarDef.
+// is declared on the type FooBarDef.
 //
 func (f FooBarDef) Render() r.Element {
 

@@ -16,8 +16,8 @@ type PreviewDef struct {
 	r.ComponentDef
 }
 
-func Preview(p PreviewProps) PreviewElem {
-	return PreviewElem{Element: r.CreateElement(buildPreview, p)}
+func Preview(p PreviewProps) *PreviewElem {
+	return buildPreviewElem(p)
 }
 
 func (o PreviewDef) Render() r.Element {

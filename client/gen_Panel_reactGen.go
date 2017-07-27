@@ -21,6 +21,12 @@ func buildPanel(cd react.ComponentDef) react.Component {
 	return PanelDef{ComponentDef: cd}
 }
 
+func buildPanelElem(props PanelProps, children ...react.Element) *PanelElem {
+	return &PanelElem{
+		Element: react.CreateElement(buildPanel, props),
+	}
+}
+
 // Props is an auto-generated proxy to the current props of Panel
 func (p PanelDef) Props() PanelProps {
 	uprops := p.ComponentDef.Props()

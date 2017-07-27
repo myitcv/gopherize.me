@@ -23,6 +23,12 @@ func buildChooser(cd react.ComponentDef) react.Component {
 	return ChooserDef{ComponentDef: cd}
 }
 
+func buildChooserElem(props ChooserProps, children ...react.Element) *ChooserElem {
+	return &ChooserElem{
+		Element: react.CreateElement(buildChooser, props),
+	}
+}
+
 // SetState is an auto-generated proxy proxy to update the state for the
 // Chooser component.  SetState does not immediately mutate c.State()
 // but creates a pending state transition.

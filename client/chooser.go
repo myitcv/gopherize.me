@@ -54,7 +54,7 @@ func (ch ChooserDef) Render() r.Element {
 				OnClick:   shuffleClick{ch},
 			},
 			r.I(&r.IProps{ClassName: "glyphicon glyphicon-refresh"}),
-			r.S("Shuffle"),
+			r.S(" Shuffle"),
 		),
 		r.Button(
 			&r.ButtonProps{
@@ -64,8 +64,8 @@ func (ch ChooserDef) Render() r.Element {
 			},
 			r.S("Reset"),
 		),
-		r.BR(nil),
-		r.BR(nil),
+		r.Br(nil),
+		r.Br(nil),
 		r.Div(
 			&r.DivProps{
 				ClassName: "panel-group",

@@ -8,7 +8,7 @@ type ChooserElem struct {
 	react.Element
 }
 
-func (c ChooserDef) ShouldComponentUpdateIntf(nextProps, prevState, nextState interface{}) bool {
+func (c ChooserDef) ShouldComponentUpdateIntf(nextProps react.Props, prevState, nextState react.State) bool {
 	res := false
 
 	{
@@ -53,9 +53,13 @@ func (c ChooserDef) GetInitialStateIntf() react.State {
 	return ChooserState{}
 }
 
-func (c ChooserState) EqualsIntf(val interface{}) bool {
+func (c ChooserState) EqualsIntf(val react.State) bool {
 	return c == val.(ChooserState)
 }
+
+// IsProps is an auto-generated definition so that ChooserProps implements
+// the myitcv.io/react.Props interface.
+func (c ChooserProps) IsProps() {}
 
 // Props is an auto-generated proxy to the current props of Chooser
 func (c ChooserDef) Props() ChooserProps {
@@ -63,8 +67,8 @@ func (c ChooserDef) Props() ChooserProps {
 	return uprops.(ChooserProps)
 }
 
-func (c ChooserProps) EqualsIntf(val interface{}) bool {
+func (c ChooserProps) EqualsIntf(val react.Props) bool {
 	return c == val.(ChooserProps)
 }
 
-var _ react.Equals = ChooserProps{}
+var _ react.Props = ChooserProps{}

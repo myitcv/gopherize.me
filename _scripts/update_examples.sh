@@ -5,10 +5,19 @@
 
 source "${BASH_SOURCE%/*}/common.bash"
 
-r=$(mktemp -d)
+r=$HOME/.cache/gopherize.me_site
 t=$(mktemp -d)
 
-echo "Cloning git@github.com:myitcv/gopherize.me_site.git into $r"
+(
+	cd $r
+
+	echo "Fetching git@github.com:myitcv/gopherize.me_site.git into $r"
+
+	git fetch
+	git checkout -f master
+	git reset --hard origin/master
+	rm -rf $r/*
+)
 
 echo ""
 
@@ -18,22 +27,24 @@ echo "Copying..."
 	cd $t
 	wget --quiet --mirror http://localhost:8080/myitcv.io/gopherize.me/client/
 )
-cp -rp $t/localhost:8080/myitcv.io/gopherize.me/client/ $r/gopherize.me_site/
 
-du -sh $r/gopherize.me_site
+cp -rp $t/localhost:8080/myitcv.io/gopherize.me/client/* $r
 
-cp -rp artwork $r/gopherize.me_site/
+du -sh $r/!(artwork)
+
+cp -rp artwork $r
 
 echo ""
 
-cd $r/gopherize.me_site
-git init
+cd $r
 git config hooks.stopbinaries false
-touch .nojekyll
+
+if [ -z "$(git status --porcelain)" ]
+then
+	echo "No changes to commit"
+	exit 0
+fi
 
 git add -A
 git commit -am "Examples update at $(date)"
-
-git remote add origin git@github.com:myitcv/gopherize.me_site.git
-
 git push -f

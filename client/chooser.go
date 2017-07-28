@@ -100,9 +100,8 @@ func (ch ChooserDef) Render() r.Element {
 				Original web app by <a href='https://twitter.com/matryer' target='_blank'>Mat Ryer</a><br/>
 				Front-end Go React version by <a href="https://twitter.com/_myitcv" target="_blank">Paul Jolly</a>
 				<hr>
-				<a href='https://github.com/matryer/gopherize.me'>View on GitHub</a>
-				●
-				<a href='/branding'>Add your brand</a>
+				<a href='https://github.com/myitcv/gopherize.me/tree/master/client'>Source on GitHub</a><br/>
+				<a href='https://github.com/matryer/gopherize.me'>Original source on GitHub</a>
 			</footer>
 		`),
 	}

@@ -8,7 +8,7 @@ type OuterElem struct {
 	react.Element
 }
 
-func (o OuterDef) ShouldComponentUpdateIntf(nextProps, prevState, nextState interface{}) bool {
+func (o OuterDef) ShouldComponentUpdateIntf(nextProps react.Props, prevState, nextState react.State) bool {
 	res := false
 
 	v := prevState.(OuterState)
@@ -50,6 +50,6 @@ func (o OuterDef) GetInitialStateIntf() react.State {
 	return OuterState{}
 }
 
-func (o OuterState) EqualsIntf(val interface{}) bool {
+func (o OuterState) EqualsIntf(val react.State) bool {
 	return o == val.(OuterState)
 }

@@ -8,7 +8,7 @@ type PanelElem struct {
 	react.Element
 }
 
-func (p PanelDef) ShouldComponentUpdateIntf(nextProps, prevState, nextState interface{}) bool {
+func (p PanelDef) ShouldComponentUpdateIntf(nextProps react.Props, prevState, nextState react.State) bool {
 	res := false
 
 	{
@@ -27,14 +27,18 @@ func buildPanelElem(props PanelProps, children ...react.Element) *PanelElem {
 	}
 }
 
+// IsProps is an auto-generated definition so that PanelProps implements
+// the myitcv.io/react.Props interface.
+func (p PanelProps) IsProps() {}
+
 // Props is an auto-generated proxy to the current props of Panel
 func (p PanelDef) Props() PanelProps {
 	uprops := p.ComponentDef.Props()
 	return uprops.(PanelProps)
 }
 
-func (p PanelProps) EqualsIntf(val interface{}) bool {
+func (p PanelProps) EqualsIntf(val react.Props) bool {
 	return p == val.(PanelProps)
 }
 
-var _ react.Equals = PanelProps{}
+var _ react.Props = PanelProps{}

@@ -21,6 +21,7 @@ func Preview(p PreviewProps) *PreviewElem {
 }
 
 func (o PreviewDef) Render() r.Element {
+	debugln("Preview.Render")
 	var parts []r.Element
 
 	curr := o.Props().Current

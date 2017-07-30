@@ -26,6 +26,7 @@ type PanelDef struct {
 }
 
 func (pa PanelDef) Render() r.Element {
+	debugln("Panel.Render")
 	props := pa.Props()
 
 	collapse := " collapse"

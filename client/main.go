@@ -4,6 +4,8 @@
 package main
 
 import (
+	"fmt"
+
 	r "myitcv.io/react"
 
 	"honnef.co/go/js/dom"
@@ -15,4 +17,20 @@ func main() {
 	domTarget := document.GetElementByID("gopherize.me")
 
 	r.Render(Outer(), domTarget)
+}
+
+const (
+	debug = true
+)
+
+func debugf(format string, args ...interface{}) {
+	if debug {
+		fmt.Printf(format, args...)
+	}
+}
+
+func debugln(args ...interface{}) {
+	if debug {
+		fmt.Println(args...)
+	}
 }

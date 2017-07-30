@@ -27,6 +27,7 @@ func Chooser(p ChooserProps) *ChooserElem {
 }
 
 func (ch ChooserDef) Render() r.Element {
+	debugln("Chooser.Render")
 	var catDivs []r.Element
 
 	st := ch.State()
@@ -110,6 +111,7 @@ func (ch ChooserDef) Render() r.Element {
 }
 
 func (ch ChooserDef) Expand(i int) {
+	debugln("Chooser.Expand")
 	s := ch.State()
 	s.open = i
 	ch.SetState(s)

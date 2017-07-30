@@ -29,6 +29,7 @@ func (o OuterDef) ComponentWillMount() {
 }
 
 func (o OuterDef) Render() r.Element {
+	debugln("Outer.Render")
 	return r.Div(nil,
 		Preview(PreviewProps{Current: o.State().current}),
 		Chooser(ChooserProps{
@@ -40,12 +41,14 @@ func (o OuterDef) Render() r.Element {
 }
 
 func (o OuterDef) ResetGopher() {
+	debugln("Outer.ResetGopher")
 	s := o.State()
 	s.current = defaultGopher(s.config)
 	o.SetState(s)
 }
 
 func (o OuterDef) UpdateGopher(part int, val string) {
+	debugln("Outer.UpdateGopher")
 	s := o.State()
 
 	nps := make([]string, len(s.current.Parts))
@@ -57,6 +60,7 @@ func (o OuterDef) UpdateGopher(part int, val string) {
 }
 
 func (o OuterDef) RandomGopher() {
+	debugln("Outer.RandomGopher")
 	s := o.State()
 	c := o.State().config
 

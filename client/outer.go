@@ -4,6 +4,7 @@ package main
 
 import (
 	"math/rand"
+	"time"
 
 	r "myitcv.io/react"
 )
@@ -15,6 +16,7 @@ type OuterDef struct {
 type OuterState struct {
 	current *Gopher
 	config  *Config
+	rand    *rand.Rand
 }
 
 func Outer() *OuterElem {
@@ -25,6 +27,7 @@ func (o OuterDef) ComponentWillMount() {
 	o.SetState(OuterState{
 		current: defaultGopher(hackConfig),
 		config:  hackConfig,
+		rand:    rand.New(rand.NewSource(time.Now().Unix())),
 	})
 }
 
@@ -58,12 +61,12 @@ func (o OuterDef) UpdateGopher(part int, val string) {
 
 func (o OuterDef) RandomGopher() {
 	s := o.State()
-	c := o.State().config
+	c := s.config
 
 	var parts []string
 
 	for _, cat := range c.Categories {
-		p := cat.Options[rand.Intn(len(cat.Options))]
+		p := cat.Options[s.rand.Intn(len(cat.Options))]
 		parts = append(parts, p)
 	}
 

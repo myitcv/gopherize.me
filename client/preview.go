@@ -40,7 +40,7 @@ func (o PreviewDef) Render() r.Element {
 		}
 	}
 
-	return r.Div(&r.DivProps{ClassName: "col-xs-8"},
+	return r.Div(&r.DivProps{ClassName: "col-xs-8 col-lg-5"},
 		r.Div(&r.DivProps{ID: "preview"},
 			parts...,
 		),

@@ -106,7 +106,7 @@ func (ch ChooserDef) Render() r.Element {
 		`),
 	}
 
-	return r.Div(&r.DivProps{ClassName: "col-xs-4"}, args...)
+	return r.Div(&r.DivProps{ClassName: "col-xs-4 col-lg-3"}, args...)
 }
 
 func (ch ChooserDef) Expand(i int) {

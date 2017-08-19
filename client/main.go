@@ -4,15 +4,39 @@
 package main
 
 import (
-	r "myitcv.io/react"
+	"net/url"
 
 	"honnef.co/go/js/dom"
+	"myitcv.io/react"
 )
 
-var document = dom.GetWindow().Document()
+var document = dom.GetWindow().Document().(dom.HTMLDocument)
 
 func main() {
 	domTarget := document.GetElementByID("gopherize.me")
 
-	r.Render(Outer(), domTarget)
+	u, err := url.Parse(document.URL())
+	if err != nil {
+		panic(err)
+	}
+
+	var elems []react.Element
+
+	if u.Query().Get("hideGithubRibbon") != "true" {
+		a := react.A(
+			&react.AProps{
+				ClassName: "github-fork-ribbon right-top",
+				Target:    "_blank",
+				Href:      "https://github.com/myitcv/gopherize.me/tree/master/client",
+				Title:     "Source on GitHub",
+			},
+			react.S("Source on GitHub"),
+		)
+
+		elems = append(elems, a)
+	}
+
+	elems = append(elems, Outer())
+
+	react.Render(react.Div(nil, elems...), domTarget)
 }

@@ -23,7 +23,7 @@ func buildPanel(cd react.ComponentDef) react.Component {
 
 func buildPanelElem(props PanelProps, children ...react.Element) *PanelElem {
 	return &PanelElem{
-		Element: react.CreateElement(buildPanel, props),
+		Element: react.CreateElement(buildPanel, props, children...),
 	}
 }
 

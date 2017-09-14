@@ -36,37 +36,39 @@ func (pa PanelDef) Render() r.Element {
 
 	var imgs []r.Element
 
-	for _, o := range props.Category.Options {
-		var src string
-		class := "item"
+	if props.Open {
+		for _, o := range props.Category.Options {
+			var src string
+			class := "item"
 
-		if o == props.Selected {
-			class += " selected"
-		} else if o == "" {
-			class += " none"
-		}
+			if o == props.Selected {
+				class += " selected"
+			} else if o == "" {
+				class += " none"
+			}
 
-		if o == "" {
-			src = blank
-		} else {
-			src = filepath.Join("artwork", o+"_thumbnail.png")
-		}
+			if o == "" {
+				src = blank
+			} else {
+				src = filepath.Join("artwork", o+"_thumbnail.png")
+			}
 
-		imgs = append(imgs,
-			r.Label(
-				&r.LabelProps{
-					ClassName: class,
-					OnClick: chooseItemClick{
-						U:  props.Update,
-						ci: props.Part,
-						v:  o,
+			imgs = append(imgs,
+				r.Label(
+					&r.LabelProps{
+						ClassName: class,
+						OnClick: chooseItemClick{
+							U:  props.Update,
+							ci: props.Part,
+							v:  o,
+						},
 					},
-				},
-				r.Img(
-					&r.ImgProps{Src: src},
+					r.Img(
+						&r.ImgProps{Src: src},
+					),
 				),
-			),
-		)
+			)
+		}
 	}
 
 	return r.Div(&r.DivProps{ClassName: "panel panel-default"},

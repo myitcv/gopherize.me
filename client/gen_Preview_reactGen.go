@@ -23,7 +23,7 @@ func buildPreview(cd react.ComponentDef) react.Component {
 
 func buildPreviewElem(props PreviewProps, children ...react.Element) *PreviewElem {
 	return &PreviewElem{
-		Element: react.CreateElement(buildPreview, props),
+		Element: react.CreateElement(buildPreview, props, children...),
 	}
 }
 

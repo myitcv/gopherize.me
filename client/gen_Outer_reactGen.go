@@ -22,7 +22,7 @@ func buildOuter(cd react.ComponentDef) react.Component {
 
 func buildOuterElem(children ...react.Element) *OuterElem {
 	return &OuterElem{
-		Element: react.CreateElement(buildOuter, nil),
+		Element: react.CreateElement(buildOuter, nil, children...),
 	}
 }
 

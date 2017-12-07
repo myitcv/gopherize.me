@@ -8,15 +8,6 @@ type PanelElem struct {
 	react.Element
 }
 
-func (p PanelDef) ShouldComponentUpdateIntf(nextProps react.Props, prevState, nextState react.State) bool {
-	res := false
-
-	{
-		res = p.Props() != nextProps.(PanelProps) || res
-	}
-	return res
-}
-
 func buildPanel(cd react.ComponentDef) react.Component {
 	return PanelDef{ComponentDef: cd}
 }

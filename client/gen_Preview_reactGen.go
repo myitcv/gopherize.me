@@ -8,15 +8,6 @@ type PreviewElem struct {
 	react.Element
 }
 
-func (p PreviewDef) ShouldComponentUpdateIntf(nextProps react.Props, prevState, nextState react.State) bool {
-	res := false
-
-	{
-		res = p.Props() != nextProps.(PreviewProps) || res
-	}
-	return res
-}
-
 func buildPreview(cd react.ComponentDef) react.Component {
 	return PreviewDef{ComponentDef: cd}
 }

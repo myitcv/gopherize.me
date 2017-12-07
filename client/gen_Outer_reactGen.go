@@ -8,14 +8,6 @@ type OuterElem struct {
 	react.Element
 }
 
-func (o OuterDef) ShouldComponentUpdateIntf(nextProps react.Props, prevState, nextState react.State) bool {
-	res := false
-
-	v := prevState.(OuterState)
-	res = !v.EqualsIntf(nextState) || res
-	return res
-}
-
 func buildOuter(cd react.ComponentDef) react.Component {
 	return OuterDef{ComponentDef: cd}
 }

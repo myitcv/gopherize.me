@@ -8,17 +8,6 @@ type ChooserElem struct {
 	react.Element
 }
 
-func (c ChooserDef) ShouldComponentUpdateIntf(nextProps react.Props, prevState, nextState react.State) bool {
-	res := false
-
-	{
-		res = c.Props() != nextProps.(ChooserProps) || res
-	}
-	v := prevState.(ChooserState)
-	res = !v.EqualsIntf(nextState) || res
-	return res
-}
-
 func buildChooser(cd react.ComponentDef) react.Component {
 	return ChooserDef{ComponentDef: cd}
 }

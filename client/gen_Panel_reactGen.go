@@ -18,6 +18,10 @@ func buildPanelElem(props PanelProps, children ...react.Element) *PanelElem {
 	}
 }
 
+func (p PanelDef) RendersElement() react.Element {
+	return p.Render()
+}
+
 // IsProps is an auto-generated definition so that PanelProps implements
 // the myitcv.io/react.Props interface.
 func (p PanelProps) IsProps() {}

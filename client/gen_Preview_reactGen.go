@@ -18,6 +18,10 @@ func buildPreviewElem(props PreviewProps, children ...react.Element) *PreviewEle
 	}
 }
 
+func (p PreviewDef) RendersElement() react.Element {
+	return p.Render()
+}
+
 // IsProps is an auto-generated definition so that PreviewProps implements
 // the myitcv.io/react.Props interface.
 func (p PreviewProps) IsProps() {}

@@ -36,7 +36,7 @@ find -path ./_vendor -prune -o -name "gen_*.go" -exec rm '{}' \;
 	popd
 }
 
-go generate ./...
+gg ./...
 
 z=$(goimports -l !(_vendor|_talks)/**/!(gen_*).go !(gen_*).go)
 if [ ! -z "$z" ]
@@ -83,3 +83,12 @@ immutableVet ./...
 # we need to explicitly test the generated test files
 go test myitcv.io/react/cmd/stateGen/_testFiles/
 
+if [ "${CI:-}" == "true" ]
+then
+	# off the back of https://github.com/myitcv/react/issues/116#issuecomment-380280847
+	# ensure that we can go get myitcv.io/react/... in a totally clean environment
+	echo "Verify that we can go get myitcv.io/react/..."
+	cd `mktemp -d`
+	export GOPATH=$PWD
+	go get myitcv.io/react/...
+fi

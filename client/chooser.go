@@ -94,7 +94,7 @@ func (ch ChooserDef) Render() r.Element {
 		jsx.HTMLElem(`
 			<footer>
 				Be truly unique, there are
-				<span classname='total_combinations'></span>
+				<span class='total_combinations'></span>
 				<hr/>
 				Artwork by <a href='https://twitter.com/ashleymcnamara' target='_blank'>Ashley McNamara</a><br />inspired by <a href='http://reneefrench.blogspot.co.uk/' target='_blank'>Renee French</a><br />
 				Original web app by <a href='https://twitter.com/matryer' target='_blank'>Mat Ryer</a><br/>

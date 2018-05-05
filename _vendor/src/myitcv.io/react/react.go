@@ -11,7 +11,7 @@ For more information see https://github.com/myitcv/react/wiki
 */
 package react // import "myitcv.io/react"
 
-//go:generate reactGen
+//go:generate coreGen
 
 import (
 	"fmt"
@@ -69,6 +69,10 @@ var compMap = make(map[reflect.Type]*js.Object)
 
 // S is the React representation of a string
 type S = core.S
+
+func Sprintf(format string, args ...interface{}) S {
+	return S(fmt.Sprintf(format, args...))
+}
 
 type elementHolder = core.ElementHolder
 
@@ -148,6 +152,10 @@ func (c ComponentDef) State() State {
 	cur := unwrapValue(is.Get(reactCompLastState)).(State)
 
 	return cur
+}
+
+func (c ComponentDef) ForceUpdate() {
+	c.elem.Call(reactCompForceUpdate)
 }
 
 type ComponentBuilder func(elem ComponentDef) Component

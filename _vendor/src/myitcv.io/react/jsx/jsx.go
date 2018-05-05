@@ -67,20 +67,29 @@ func parseSpan(n *html.Node) *react.SpanElem {
 	var kids []react.Element
 
 	var vp *react.SpanProps
+	var ds react.DataSet
 
 	if len(n.Attr) > 0 {
 		vp = new(react.SpanProps)
 
 		for _, a := range n.Attr {
-			switch a.Key {
-			case "classname":
+			switch v := a.Key; {
+			case v == "class":
 				vp.ClassName = a.Val
-			case "style":
+			case v == "style":
 				vp.Style = parseCSS(a.Val)
+			case strings.HasPrefix(v, "data-"):
+				if ds == nil {
+					ds = make(react.DataSet)
+				}
+
+				ds[strings.TrimPrefix(v, "data-")] = a.Val
 			default:
 				panic(fmt.Errorf("don't know how to handle <span> attribute %q", a.Key))
 			}
 		}
+
+		vp.DataSet = ds
 	}
 
 	for c := n.FirstChild; c != nil; c = c.NextSibling {
@@ -102,7 +111,7 @@ func parseI(n *html.Node) *react.IElem {
 			switch a.Key {
 			case "id":
 				vp.ID = a.Val
-			case "classname":
+			case "class":
 				vp.ClassName = a.Val
 			default:
 				panic(fmt.Errorf("don't know how to handle <i> attribute %q", a.Key))
@@ -129,7 +138,7 @@ func parseFooter(n *html.Node) *react.FooterElem {
 			switch a.Key {
 			case "id":
 				vp.ID = a.Val
-			case "classname":
+			case "class":
 				vp.ClassName = a.Val
 			default:
 				panic(fmt.Errorf("don't know how to handle <footer> attribute %q", a.Key))
@@ -148,22 +157,31 @@ func parseDiv(n *html.Node) *react.DivElem {
 	var kids []react.Element
 
 	var vp *react.DivProps
+	var ds react.DataSet
 
 	if len(n.Attr) > 0 {
 		vp = new(react.DivProps)
 
 		for _, a := range n.Attr {
-			switch a.Key {
-			case "id":
+			switch v := a.Key; {
+			case v == "id":
 				vp.ID = a.Val
-			case "classname":
+			case v == "class":
 				vp.ClassName = a.Val
-			case "style":
+			case v == "style":
 				vp.Style = parseCSS(a.Val)
+			case strings.HasPrefix(v, "data-"):
+				if ds == nil {
+					ds = make(react.DataSet)
+				}
+
+				ds[strings.TrimPrefix(v, "data-")] = a.Val
 			default:
 				panic(fmt.Errorf("don't know how to handle <div> attribute %q", a.Key))
 			}
 		}
+
+		vp.DataSet = ds
 	}
 
 	for c := n.FirstChild; c != nil; c = c.NextSibling {
@@ -173,24 +191,113 @@ func parseDiv(n *html.Node) *react.DivElem {
 	return react.Div(vp, kids...)
 }
 
+func parseUl(n *html.Node) *react.UlElem {
+	var kids []react.RendersLi
+
+	var vp *react.UlProps
+	var ds react.DataSet
+
+	if len(n.Attr) > 0 {
+		vp = new(react.UlProps)
+
+		for _, a := range n.Attr {
+			switch v := a.Key; {
+			case v == "id":
+				vp.ID = a.Val
+			case v == "class":
+				vp.ClassName = a.Val
+			case v == "style":
+				vp.Style = parseCSS(a.Val)
+			case strings.HasPrefix(v, "data-"):
+				if ds == nil {
+					ds = make(react.DataSet)
+				}
+
+				ds[strings.TrimPrefix(v, "data-")] = a.Val
+			default:
+				panic(fmt.Errorf("don't know how to handle <ul> attribute %q", a.Key))
+			}
+		}
+
+		vp.DataSet = ds
+	}
+
+	for c := n.FirstChild; c != nil; c = c.NextSibling {
+		kids = append(kids, parseLi(c))
+	}
+
+	return react.Ul(vp, kids...)
+}
+
+func parseLi(n *html.Node) *react.LiElem {
+	var kids []react.Element
+
+	var vp *react.LiProps
+	var ds react.DataSet
+
+	if len(n.Attr) > 0 {
+		vp = new(react.LiProps)
+
+		for _, a := range n.Attr {
+			switch v := a.Key; {
+			case v == "id":
+				vp.ID = a.Val
+			case v == "class":
+				vp.ClassName = a.Val
+			case v == "role":
+				vp.Role = a.Val
+			case v == "style":
+				vp.Style = parseCSS(a.Val)
+			case strings.HasPrefix(v, "data-"):
+				if ds == nil {
+					ds = make(react.DataSet)
+				}
+
+				ds[strings.TrimPrefix(v, "data-")] = a.Val
+			default:
+				panic(fmt.Errorf("don't know how to handle <li> attribute %q", a.Key))
+			}
+		}
+
+		vp.DataSet = ds
+	}
+
+	for c := n.FirstChild; c != nil; c = c.NextSibling {
+		kids = append(kids, parse(c))
+	}
+
+	return react.Li(vp, kids...)
+}
+
 func parseButton(n *html.Node) *react.ButtonElem {
 	var kids []react.Element
 
 	var vp *react.ButtonProps
+	var ds react.DataSet
 
 	if len(n.Attr) > 0 {
 		vp = new(react.ButtonProps)
 
 		for _, a := range n.Attr {
-			switch a.Key {
-			case "id":
+			switch v := a.Key; {
+			case v == "id":
 				vp.ID = a.Val
-			case "classname":
+			case v == "class":
 				vp.ClassName = a.Val
+			case v == "type":
+				vp.Type = a.Val
+			case strings.HasPrefix(v, "data-"):
+				if ds == nil {
+					ds = make(react.DataSet)
+				}
+
+				ds[strings.TrimPrefix(v, "data-")] = a.Val
 			default:
-				panic(fmt.Errorf("don't know how to handle <div> attribute %q", a.Key))
+				panic(fmt.Errorf("don't know how to handle <button> attribute %q", a.Key))
 			}
 		}
+
+		vp.DataSet = ds
 	}
 
 	for c := n.FirstChild; c != nil; c = c.NextSibling {
@@ -228,20 +335,33 @@ func parseImg(n *html.Node) *react.ImgElem {
 	var kids []react.Element
 
 	var vp *react.ImgProps
+	var ds react.DataSet
 
 	if len(n.Attr) > 0 {
 		vp = new(react.ImgProps)
 
 		for _, a := range n.Attr {
-			switch a.Key {
-			case "src":
+			switch v := a.Key; {
+			case v == "class":
+				vp.ClassName = a.Val
+			case v == "src":
 				vp.Src = a.Val
-			case "style":
+			case v == "style":
 				vp.Style = parseCSS(a.Val)
+			case v == "alt":
+				vp.Alt = a.Val
+			case strings.HasPrefix(v, "data-"):
+				if ds == nil {
+					ds = make(react.DataSet)
+				}
+
+				ds[strings.TrimPrefix(v, "data-")] = a.Val
 			default:
 				panic(fmt.Errorf("don't know how to handle <img> attribute %q", a.Key))
 			}
 		}
+
+		vp.DataSet = ds
 	}
 
 	for c := n.FirstChild; c != nil; c = c.NextSibling {
@@ -255,20 +375,33 @@ func parseA(n *html.Node) *react.AElem {
 	var kids []react.Element
 
 	var vp *react.AProps
+	var ds react.DataSet
 
 	if len(n.Attr) > 0 {
 		vp = new(react.AProps)
 
 		for _, a := range n.Attr {
-			switch a.Key {
-			case "href":
+			switch v := a.Key; {
+			case v == "href":
 				vp.Href = a.Val
-			case "target":
+			case v == "target":
 				vp.Target = a.Val
+			case v == "class":
+				vp.ClassName = a.Val
+			case v == "role":
+				vp.Role = a.Val
+			case strings.HasPrefix(v, "data-"):
+				if ds == nil {
+					ds = make(react.DataSet)
+				}
+
+				ds[strings.TrimPrefix(v, "data-")] = a.Val
 			default:
 				panic(fmt.Errorf("don't know how to handle <a> attribute %q", a.Key))
 			}
 		}
+
+		vp.DataSet = ds
 	}
 
 	for c := n.FirstChild; c != nil; c = c.NextSibling {
@@ -305,6 +438,8 @@ func parseCSS(s string) *react.CSS {
 			res.FontSize = v
 		case "font-style":
 			res.FontStyle = v
+		case "float":
+			res.Float = v
 		default:
 			panic(fmt.Errorf("unknown CSS key %q in %q", k, s))
 		}
@@ -350,6 +485,10 @@ func parse(n *html.Node) react.Element {
 		return parseButton(n)
 	case "i":
 		return parseI(n)
+	case "ul":
+		return parseUl(n)
+	case "li":
+		return parseLi(n)
 	default:
 		panic(fmt.Errorf("cannot handle Element %v", n.Data))
 	}

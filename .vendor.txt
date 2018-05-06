@@ -12,6 +12,6 @@
     ./_vendor/src/github.com/neelance/sourcemap    8c68805598ab8d5637b1a72b5f7d381ea0f39c31  git@github.com:neelance/sourcemap
     ./_vendor/src/github.com/shurcooL/httpfs       809beceb23714880abc4a382a00c05f89d13b1cc  git@github.com:shurcooL/httpfs
     ./_vendor/src/github.com/russross/blackfriday  067529f716f4c3f5e37c8c95ddd59df1007290ae  git@github.com:russross/blackfriday
-    ./_vendor/src/myitcv.io/react                  745937181f0b435e275bb0c245df33de8f6e4cb2  git@github.com:myitcv/react
+    ./_vendor/src/myitcv.io/react                  8d463e1e5c5a24312747d996ac236ca5df354df2  git@github.com:myitcv/react
     ./_vendor/src/myitcv.io/gogenerate             bd69a94c96953d20e106734856b69d71c8fa122b  git@github.com:myitcv/gogenerate
     ./_vendor/src/honnef.co/go/js/dom              232ea52e05f29e29a0cb2a9ba6574d79fd3255af  git@github.com:dominikh/go-js-dom

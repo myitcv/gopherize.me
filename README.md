@@ -5,6 +5,6 @@
 
 Hosted version can be found here:
 
-http://blog.myitcv.io/gopherize.me_site/
+https://blog.myitcv.io/gopherize.me_site/
 
 See https://github.com/myitcv/gopherize.me/tree/master/client for more details

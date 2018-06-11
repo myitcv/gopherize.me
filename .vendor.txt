@@ -1,17 +1,17 @@
-    ./_vendor/src/golang.org/x/net                 ab5485076ff3407ad2d02db054635913f017b0ed  https://go.googlesource.com/net
-    ./_vendor/src/golang.org/x/sys                 c4489faa6e5ab84c0ef40d6ee878f7a030281f0f  https://go.googlesource.com/sys
-    ./_vendor/src/golang.org/x/crypto              6914964337150723782436d56b3f21610a74ce7b  https://go.googlesource.com/crypto
-    ./_vendor/src/golang.org/x/tools               3da34b1b520a543128e8441cd2ffffc383111d03  https://go.googlesource.com/tools
+    ./_vendor/src/honnef.co/go/js/dom              6da835bec70f84cd4f0c0b8a7239a9260b6bc37f  git@github.com:dominikh/go-js-dom
+    ./_vendor/src/github.com/spf13/cobra           1e58aa3361fd650121dceeedc399e7189c05674a  git@github.com:spf13/cobra
+    ./_vendor/src/github.com/spf13/pflag           3ebe029320b2676d667ae88da602a5f854788a8a  git@github.com:spf13/pflag
+    ./_vendor/src/github.com/russross/blackfriday  11635eb403ff09dbc3a6b5a007ab5ab09151c229  git@github.com:russross/blackfriday
     ./_vendor/src/github.com/gopherjs/gopherjs     8dffc02ea1cb8398bb73f30424697c60fcf8d4c5  git@github.com:gopherjs/gopherjs
     ./_vendor/src/github.com/gopherjs/jsbuiltin    67703bfb044e3192fbcab025c3aeaeedafad1f2f  git@github.com:gopherjs/jsbuiltin
     ./_vendor/src/github.com/kisielk/gotool        0de1eaf82fa3f583ce21fde859f1e7e0c5e9b220  git@github.com:kisielk/gotool
     ./_vendor/src/github.com/fsnotify/fsnotify     4da3e2cfbabc9f751898f250b49f2439785783a1  git@github.com:fsnotify/fsnotify
-    ./_vendor/src/github.com/spf13/cobra           715f41bd7a70b5111f898b71ab484da52ee6266d  git@github.com:spf13/cobra
-    ./_vendor/src/github.com/spf13/pflag           e57e3eeb33f795204c1ca35f56c44f83227c6e66  git@github.com:spf13/pflag
     ./_vendor/src/github.com/neelance/astrewrite   99348263ae862cc230986ce88deaddbf7edcc034  git@github.com:neelance/astrewrite
     ./_vendor/src/github.com/neelance/sourcemap    8c68805598ab8d5637b1a72b5f7d381ea0f39c31  git@github.com:neelance/sourcemap
     ./_vendor/src/github.com/shurcooL/httpfs       809beceb23714880abc4a382a00c05f89d13b1cc  git@github.com:shurcooL/httpfs
-    ./_vendor/src/github.com/russross/blackfriday  067529f716f4c3f5e37c8c95ddd59df1007290ae  git@github.com:russross/blackfriday
-    ./_vendor/src/myitcv.io/react                  8d463e1e5c5a24312747d996ac236ca5df354df2  git@github.com:myitcv/react
+    ./_vendor/src/myitcv.io/react                  a02167fbbe037a3fb937307b309f03903aa93c4d  git@github.com:myitcv/react
     ./_vendor/src/myitcv.io/gogenerate             bd69a94c96953d20e106734856b69d71c8fa122b  git@github.com:myitcv/gogenerate
-    ./_vendor/src/honnef.co/go/js/dom              232ea52e05f29e29a0cb2a9ba6574d79fd3255af  git@github.com:dominikh/go-js-dom
+    ./_vendor/src/golang.org/x/net                 1e491301e022f8f977054da4c2d852decd59571f  https://go.googlesource.com/net
+    ./_vendor/src/golang.org/x/tools               c65208ee29128450a4a024e3b7710f3a8d14028d  https://go.googlesource.com/tools
+    ./_vendor/src/golang.org/x/sys                 bff228c7b664c5fce602223a05fb708fd8654986  https://go.googlesource.com/sys
+    ./_vendor/src/golang.org/x/crypto              8ac0e0d97ce45cd83d1d7243c060cb8461dda5e9  https://go.googlesource.com/crypto

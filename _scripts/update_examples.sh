@@ -11,7 +11,7 @@ t=$(mktemp -d)
 (
 	cd $r
 
-	echo "Fetching git@github.com:myitcv/gopherize.me_site.git into $r"
+	echo "Fetching https://github.com/myitcv/gopherize.me_site into $r"
 
 	git fetch
 	git checkout -f master

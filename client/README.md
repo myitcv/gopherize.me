@@ -1,8 +1,6 @@
-### gopherize.me
+## `** myitcv.io/gopherize.me/client **` has moved
+The repository hosting `myitcv.io/gopherize.me/client` has changed.
 
-A simple frontend-only rewrite of https://gopherize.me using Go (via [GopherJS](https://github.com/gopherjs/gopherjs))
-and React (via [`myitcv.io/react`](https://myitcv.io/react))
+`myitcv.io/gopherize.me/client` can now be found at:
 
-Hosted version can be found here:
-
-http://blog.myitcv.io/gopherize.me_site/
+https://github.com/myitcv/x/tree/master/gopherize.me/client
